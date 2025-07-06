@@ -10,15 +10,20 @@ public class CameraSwitcher : MonoBehaviour
         _currentCamera = 0;
     }
 
-    private void Update()
+    public void NextCamera()
     {
-        if (Input.GetKeyDown(KeyCode.C)) SwitchCamera();
+        _currentCamera = (_currentCamera + 1) % _cameras.Length;
+        SwitchCamera();
+    }
+
+    public void PreviousCamera()
+    {
+        _currentCamera = _currentCamera == 0 ? _cameras.Length - 1 : _currentCamera - 1;
+        SwitchCamera();
     }
 
     private void SwitchCamera()
     {
-        _currentCamera = (_currentCamera + 1) % _cameras.Length;
-
         for (int i = 0; i < _cameras.Length; i++)
         {
             bool isActive = _currentCamera == i;
